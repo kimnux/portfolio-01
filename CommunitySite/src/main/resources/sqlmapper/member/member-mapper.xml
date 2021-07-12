@@ -6,10 +6,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.portfolio.site.member.mapper.MemberMapper">
 
 	<insert id="join" parameterType="MemberVO">
-		insert into 
+		insert into tb_member
 			(userId, password, nickName, grade, regDt) 
 		values 
 			(#{userId}, #{password}, #{nickName}, #{grade}, #{regDt})
 	</insert>
+	
+	<select id="login" parameterType="MemberVO" resultType="MemberVO">
+		select nickName, grade from tb_member where userId=#{userId} and password=#{password}
+	</select>
 	
 </mapper>
