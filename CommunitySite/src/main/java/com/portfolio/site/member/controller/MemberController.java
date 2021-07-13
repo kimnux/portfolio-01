@@ -7,12 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.portfolio.site.member.service.MemberService;
 import com.portfolio.site.member.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * @author dongwook
+ * 
+ * 2021.07.12
+ */
 @Controller
 @RequestMapping("/member")
 @Slf4j
@@ -21,18 +28,38 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	/**
+	 * 
+	 * @param req
+	 * @return String
+	 * 
+	 * 2021.07.12
+	 */
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpServletRequest req) {
 		return "member/login";
 	}
 	
+	/**
+	 * 
+	 * @param req
+	 * @param memberVO
+	 * @return boolean
+	 * 
+	 * 2021.07.12
+	 */
 	@PostMapping("/loginOk")
-	public String loginOk(HttpServletRequest req, MemberVO memberVO) {
+	@ResponseBody
+	public boolean loginOk(HttpServletRequest req, MemberVO memberVO) {
 		MemberVO user = memberService.login(memberVO);
-		log.info("user : "+user);
+
+		if(user == null) {
+			return false;
+		}else {
+			req.getSession().setAttribute("user_info", user);
+			return true;
+		}
 		
-		//req.getSession().setAttribute("user_info", user);
-		return "main";
 	}
 	
 	
