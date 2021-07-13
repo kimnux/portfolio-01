@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 
  * @author dongwook
+ * 
  * 2021.07.12
  */
 @Service
@@ -24,6 +25,8 @@ public class MemberService {
 	 * 
 	 * @param param
 	 * @return MemberVO
+	 * 
+	 * 2021.07.12
 	 */
 	public MemberVO login(MemberVO param) {
 		MemberVO user = null;

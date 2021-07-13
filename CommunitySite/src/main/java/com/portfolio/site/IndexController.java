@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * 
+ * @author dongwook
+ *
+ * 2021.07.11
+ */
 @Controller
 @RequestMapping("/")
 @Slf4j

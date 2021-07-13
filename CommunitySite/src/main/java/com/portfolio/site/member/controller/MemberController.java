@@ -14,6 +14,12 @@ import com.portfolio.site.member.vo.MemberVO;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * @author dongwook
+ * 
+ * 2021.07.12
+ */
 @Controller
 @RequestMapping("/member")
 @Slf4j
@@ -22,11 +28,26 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	/**
+	 * 
+	 * @param req
+	 * @return String
+	 * 
+	 * 2021.07.12
+	 */
 	@GetMapping("/login")
 	public String login(HttpServletRequest req) {
 		return "member/login";
 	}
 	
+	/**
+	 * 
+	 * @param req
+	 * @param memberVO
+	 * @return boolean
+	 * 
+	 * 2021.07.12
+	 */
 	@PostMapping("/loginOk")
 	@ResponseBody
 	public boolean loginOk(HttpServletRequest req, MemberVO memberVO) {
