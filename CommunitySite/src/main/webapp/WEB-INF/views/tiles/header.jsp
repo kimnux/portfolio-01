@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<button onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인</button>
 </body>
 </html>

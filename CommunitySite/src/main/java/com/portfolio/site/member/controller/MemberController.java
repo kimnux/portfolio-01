@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.portfolio.site.member.service.MemberService;
 import com.portfolio.site.member.vo.MemberVO;
@@ -22,17 +23,22 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpServletRequest req) {
 		return "member/login";
 	}
 	
 	@PostMapping("/loginOk")
-	public String loginOk(HttpServletRequest req, MemberVO memberVO) {
+	@ResponseBody
+	public boolean loginOk(HttpServletRequest req, MemberVO memberVO) {
 		MemberVO user = memberService.login(memberVO);
-		log.info("user : "+user);
+
+		if(user == null) {
+			return false;
+		}else {
+			req.getSession().setAttribute("user_info", user);
+			return true;
+		}
 		
-		//req.getSession().setAttribute("user_info", user);
-		return "main";
 	}
 	
 	

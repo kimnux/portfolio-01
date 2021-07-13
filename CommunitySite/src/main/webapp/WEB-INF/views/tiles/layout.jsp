@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title><tiles:getAsString name="title" /></title>
 <style type="text/css">
 #header {
 	width: 100%;
 	height: 50px;
-	text-align: center;
+	text-align: right;
 	background-color: aqua;
 }
 

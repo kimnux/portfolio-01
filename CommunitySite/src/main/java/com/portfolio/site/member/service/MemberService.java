@@ -28,9 +28,7 @@ public class MemberService {
 	public MemberVO login(MemberVO param) {
 		MemberVO user = null;
 		try {
-			log.info("service param : "+param);
 			user = memberMapper.login(param);
-			log.info("service user : "+user);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
