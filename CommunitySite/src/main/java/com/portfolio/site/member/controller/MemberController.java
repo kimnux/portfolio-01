@@ -37,6 +37,9 @@ public class MemberController {
 	 */
 	@GetMapping("/login")
 	public String login(HttpServletRequest req) {
+		if( req.getSession().getAttribute("user_info") != null ) {
+			return "redirect:/";
+		}
 		return "member/login";
 	}
 	
@@ -53,7 +56,7 @@ public class MemberController {
 	public boolean loginOk(HttpServletRequest req, MemberVO memberVO) {
 		MemberVO user = memberService.login(memberVO);
 
-		if(user == null) {
+		if( user == null ) {
 			return false;
 		}else {
 			req.getSession().setAttribute("user_info", user);
