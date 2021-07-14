@@ -5,8 +5,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<button onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인</button>
+	<span id="login"> </span>
+	
+<script type="text/javascript">
+$(function () {
+	
+	var user_info = '${sessionScope.user_info}';
+
+	if( user_info.length > 0 ) {
+		$("#login").html('<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>');
+	} else {
+		$("#login").html('<a href="${pageContext.request.contextPath}/member/login">로그인</a>');
+	}
+	
+	
+});
+</script>
 </body>
 </html>
