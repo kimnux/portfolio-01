@@ -46,6 +46,18 @@ public class MemberController {
 	/**
 	 * 
 	 * @param req
+	 * @return String
+	 * 2021.07.15
+	 */
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest req) {
+		req.getSession().removeAttribute("user_info");
+		return "redirect:/member/login";
+	}
+	
+	/**
+	 * 
+	 * @param req
 	 * @param memberVO
 	 * @return boolean
 	 * 
