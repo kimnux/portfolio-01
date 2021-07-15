@@ -30,19 +30,40 @@ public class MemberService {
 	 */
 	public MemberVO login(MemberVO param) {
 		MemberVO user = null;
+		
 		try {
 			user = memberMapper.login(param);
 
-			if(user == null) {
+			if( user == null ) {
 				memberMapper.loginFail(param);
+			}else {
+				memberMapper.failCntReset(user.getUserId());
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
 		return user;
+	}
+	
+	/**
+	 * 
+	 * @param userId
+	 * @return failCnt(int)
+	 * 
+	 * 2021.07.16
+	 */
+	public int selectFailCnt(String userId) {
+		int failCnt = 0;
+		
+		try {
+			failCnt = memberMapper.selectFailCnt(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return failCnt;
 	}
 	
 	

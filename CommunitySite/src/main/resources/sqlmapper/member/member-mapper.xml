@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.portfolio.site.member.mapper.MemberMapper">
 
+	<!-- 회원가입 -->
 	<insert id="join" parameterType="MemberVO">
 		insert into tb_member
 			(userId, password, nickName, grade, regDt) 
@@ -12,12 +13,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(#{userId}, #{password}, #{nickName}, #{grade}, #{regDt})
 	</insert>
 	
+	<!-- 로그인 -->
 	<select id="login" parameterType="MemberVO" resultType="MemberVO">
-		select nickName, grade from tb_member where userId=#{userId} and password=#{password}
+		SELECT userId, nickName, grade, failCnt From tb_member WHERE userId=#{userId} AND password=#{password}
 	</select>
 	
+	<!-- 로그인 실패시 카운트 증가 -->
 	<update id="loginFail" parameterType="MemberVO" >
 		UPDATE tb_member SET failCnt = (failCnt + 1) WHERE userId = #{userId}
 	</update>
+	
+	<!-- 로그인시 failCnt 1 이상인 경우 초기화 -->
+	<update id="failCntReset" parameterType="String" >
+		UPDATE tb_member SET failCnt = 0 WHERE userId = #{userId}
+	</update>
+	
+	<!-- failCnt 확인 -->
+	<select id="selectFailCnt" parameterType="String" resultType="Integer">
+		SELECT failCnt FROM tb_member WHERE userId = #{userId}
+	</select>
+	
+	
+	
 	
 </mapper>

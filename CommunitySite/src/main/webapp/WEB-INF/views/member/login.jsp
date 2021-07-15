@@ -37,12 +37,14 @@ function loginCheck() {
 		url:"${pageContext.request.contextPath}/member/loginOk", // 전송할 경로
 		data: {"userId":userId , "password":password} , // 전송할 키와 값
 		success : function(data) {
-			if(data) {
+			if(data === 1) {
 				alert("안녕하세요 반갑습니다.");
 				location.href="${pageContext.request.contextPath}/";
-			}else {
+			}else if( data === -1 ) {
 				$('#failText').html('아이디/비밀번호를 환인해주세요.');
 				$('#failText').css('color','red').css('font-weight', 'bold');
+			} else if( data === 0 ){
+				alert('비밀번호가 5회이상 틀렸습니다.\n관리자에게 문의하세요.');
 			}
 		},
 		error : function(request, status, errorr) {

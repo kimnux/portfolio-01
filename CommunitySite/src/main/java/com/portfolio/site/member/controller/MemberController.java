@@ -65,14 +65,19 @@ public class MemberController {
 	 */
 	@PostMapping("/loginOk")
 	@ResponseBody
-	public boolean loginOk(HttpServletRequest req, MemberVO memberVO) {
-		MemberVO user = memberService.login(memberVO);
+	public int loginOk(HttpServletRequest req, MemberVO memberVO) {
+		int failCnt = memberService.selectFailCnt(memberVO.getUserId());
+		
+		if( failCnt >= 5 ) {
+			return 0;
+		}
 
+		MemberVO user = memberService.login(memberVO);
 		if( user == null ) {
-			return false;
+			return -1;
 		}else {
 			req.getSession().setAttribute("user_info", user);
-			return true;
+			return 1;
 		}
 		
 	}
