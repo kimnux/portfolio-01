@@ -32,10 +32,19 @@ public class MemberService {
 		MemberVO user = null;
 		try {
 			user = memberMapper.login(param);
+
+			if(user == null) {
+				memberMapper.loginFail(param);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 		return user;
 	}
+	
+	
 	
 }
