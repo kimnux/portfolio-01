@@ -26,4 +26,12 @@ public interface MemberMapper {
 	 * 2021.07.12
 	 */
 	public MemberVO login(MemberVO memberVO) throws Exception;
+	
+	/**
+	 * 
+	 * @param memberVO
+	 * @return int
+	 * @throws Exception
+	 */
+	public int loginFail(MemberVO memberVO) throws Exception;
 }

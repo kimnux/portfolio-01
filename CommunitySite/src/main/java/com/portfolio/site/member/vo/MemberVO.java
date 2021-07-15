@@ -11,4 +11,5 @@ public class MemberVO {
 	private String grade;
 	
 	private String regDt;
+	private int failCnt;
 }

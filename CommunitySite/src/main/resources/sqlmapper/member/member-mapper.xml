@@ -16,4 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select nickName, grade from tb_member where userId=#{userId} and password=#{password}
 	</select>
 	
+	<update id="loginFail" parameterType="MemberVO" >
+		UPDATE tb_member SET failCnt = (failCnt + 1) WHERE userId = #{userId}
+	</update>
+	
 </mapper>
