@@ -30,8 +30,31 @@ public interface MemberMapper {
 	/**
 	 * 
 	 * @param memberVO
-	 * @return int
 	 * @throws Exception
+	 * 
+	 * 2021.07.15
 	 */
-	public int loginFail(MemberVO memberVO) throws Exception;
+	public void loginFail(MemberVO memberVO) throws Exception;
+	
+	/**
+	 * 
+	 * @param userId
+	 * @throws Exception
+	 * 
+	 * 2021.07.16
+	 */
+	public void failCntReset(String userId) throws Exception;
+	
+	/**
+	 * 
+	 * @param userId
+	 * @return failCnt(int)
+	 * @throws Exception
+	 * 
+	 * 2021.07.16
+	 */
+	public int selectFailCnt(String userId) throws Exception;
+	
+	
+	
 }
