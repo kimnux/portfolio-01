@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="MemberVO">
 		insert into tb_member
-			(userId, password, nickName, grade, regDt) 
+			(userId, password, nickName) 
 		values 
-			(#{userId}, #{password}, #{nickName}, #{grade}, #{regDt})
+			(#{userId}, #{password}, #{nickName})
 	</insert>
 	
 	<!-- 로그인 -->

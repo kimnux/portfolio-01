@@ -79,8 +79,29 @@ public class MemberController {
 			req.getSession().setAttribute("user_info", user);
 			return 1;
 		}
-		
 	}
 	
+	/**
+	 * 
+	 * @param req
+	 * @return String
+	 * 
+	 * 2021.07.17
+	 */
+	@GetMapping("/joinPage")
+	public String joinPage(HttpServletRequest req) {
+		if( req.getSession().getAttribute("user_info") != null ) {
+			return "redirect:/";
+		}
+		return "member/join";
+	}
+	
+	@PostMapping("/joinOk")
+	@ResponseBody
+	public int joinOk(MemberVO memberVO) {
+		int result = memberService.join(memberVO);
+		log.info("joinOk - result : "+result);
+		return result;
+	}
 	
 }

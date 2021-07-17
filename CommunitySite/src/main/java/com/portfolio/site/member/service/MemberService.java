@@ -66,6 +66,22 @@ public class MemberService {
 		return failCnt;
 	}
 	
+	/**
+	 * 
+	 * @param memberVO
+	 * 
+	 * 2021.07.17
+	 */
+	public int join(MemberVO memberVO) {
+		int result = 0;
+		try {
+			result = memberMapper.join(memberVO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 	
 }

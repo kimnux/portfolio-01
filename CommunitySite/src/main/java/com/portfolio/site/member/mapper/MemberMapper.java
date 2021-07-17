@@ -15,7 +15,7 @@ public interface MemberMapper {
 	 * 
 	 * 2021.07.12
 	 */
-	public void join(MemberVO memberVO);
+	public int join(MemberVO memberVO) throws Exception;
 	
 	/**
 	 * 

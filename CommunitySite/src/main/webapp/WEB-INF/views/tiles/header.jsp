@@ -9,6 +9,7 @@
 </head>
 <body>
 	<span id="login"> </span>
+	<span id="join"> </span>
 	
 <script type="text/javascript">
 $(function () {
@@ -19,6 +20,7 @@ $(function () {
 		$("#login").html('<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>');
 	} else {
 		$("#login").html('<a href="${pageContext.request.contextPath}/member/login">로그인</a>');
+		$("#join").html('<a href="${pageContext.request.contextPath}/member/joinPage">회원가입</a>');
 	}
 	
 	
