@@ -15,6 +15,13 @@
 		<org.apache.tiles-version>3.0.3</org.apache.tiles-version>
 	</properties>
 	<dependencies>
+		<!-- 암호화 -->
+		<dependency>
+		  <groupId>org.springframework.security</groupId>
+		  <artifactId>spring-security-crypto</artifactId>
+		  <version>5.3.10.RELEASE</version>
+		</dependency>
+	
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>

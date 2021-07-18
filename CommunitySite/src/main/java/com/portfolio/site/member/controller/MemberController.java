@@ -37,6 +37,7 @@ public class MemberController {
 	 */
 	@GetMapping("/login")
 	public String login(HttpServletRequest req) {
+		
 		if( req.getSession().getAttribute("user_info") != null ) {
 			return "redirect:/";
 		}
@@ -51,6 +52,7 @@ public class MemberController {
 	 */
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest req) {
+		
 		req.getSession().removeAttribute("user_info");
 		return "redirect:/member/login";
 	}
@@ -65,14 +67,14 @@ public class MemberController {
 	 */
 	@PostMapping("/loginOk")
 	@ResponseBody
-	public int loginOk(HttpServletRequest req, MemberVO memberVO) {
-		int failCnt = memberService.selectFailCnt(memberVO.getUserId());
-		
+	public int loginOk(HttpServletRequest req, String userId, String password) {
+
+		int failCnt = memberService.selectFailCnt(userId);
 		if( failCnt >= 5 ) {
 			return 0;
 		}
 
-		MemberVO user = memberService.login(memberVO);
+		MemberVO user = memberService.login(userId, password);
 		if( user == null ) {
 			return -1;
 		}else {
@@ -90,6 +92,7 @@ public class MemberController {
 	 */
 	@GetMapping("/joinPage")
 	public String joinPage(HttpServletRequest req) {
+		
 		if( req.getSession().getAttribute("user_info") != null ) {
 			return "redirect:/";
 		}
@@ -99,6 +102,7 @@ public class MemberController {
 	@PostMapping("/joinOk")
 	@ResponseBody
 	public int joinOk(MemberVO memberVO) {
+		
 		int result = memberService.join(memberVO);
 		log.info("joinOk - result : "+result);
 		return result;
