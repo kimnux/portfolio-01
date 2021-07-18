@@ -1,5 +1,7 @@
 package com.portfolio.site.member.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.portfolio.site.member.vo.MemberVO;
 
 /**
@@ -25,7 +27,15 @@ public interface MemberMapper {
 	 * 
 	 * 2021.07.12
 	 */
-	public MemberVO login(MemberVO memberVO) throws Exception;
+	public MemberVO login(@Param("userId") String userId, @Param("password") String password) throws Exception;
+	
+	/**
+	 * 
+	 * @param password
+	 * @return String
+	 * @throws Exception
+	 */
+	public String userPwd(String password) throws Exception;
 	
 	/**
 	 * 
@@ -34,7 +44,7 @@ public interface MemberMapper {
 	 * 
 	 * 2021.07.15
 	 */
-	public void loginFail(MemberVO memberVO) throws Exception;
+	public void loginFail(String userId) throws Exception;
 	
 	/**
 	 * 

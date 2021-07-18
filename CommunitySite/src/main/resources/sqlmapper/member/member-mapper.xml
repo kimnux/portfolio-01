@@ -14,12 +14,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="MemberVO" resultType="MemberVO">
-		SELECT userId, nickName, grade, failCnt From tb_member WHERE userId=#{userId} AND password=#{password}
+	<select id="login" parameterType="String" resultType="MemberVO">
+		SELECT userId, nickName, grade, failCnt FROM tb_member WHERE userId=#{userId} AND password=#{password}
+	</select>
+	
+	<select id="userPwd" parameterType="String" resultType="String">
+		SELECT password FROM tb_member WHERE userId=#{userId}
 	</select>
 	
 	<!-- 로그인 실패시 카운트 증가 -->
-	<update id="loginFail" parameterType="MemberVO" >
+	<update id="loginFail" parameterType="String" >
 		UPDATE tb_member SET failCnt = (failCnt + 1) WHERE userId = #{userId}
 	</update>
 	
