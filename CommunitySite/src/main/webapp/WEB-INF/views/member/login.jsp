@@ -49,7 +49,7 @@ function loginCheck() {
 		error : function(request, status, errorr) {
 			console.log(errorr);
 		}
-	}); // end ajax	
+	}); // end ajax
 }
 </script>
 </body>

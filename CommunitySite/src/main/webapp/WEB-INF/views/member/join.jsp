@@ -30,21 +30,34 @@ function joinForm() {
 	var password = $('#password').val();
 	var nickName = $('#nickName').val();
 	
-	$.ajax({
-		type:"POST",
-		url:"${pageContext.request.contextPath}/member/joinOk", // 전송할 경로
-		data: {"userId":userId, "password":password, "nickName":nickName} , // 전송할 키와 값
-		success : function(data) {
-			if(data === 1) {
-				location.href="${pageContext.request.contextPath}/";
-			}else {
-				return ;
+	var regExpPassword = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^*+=-]).{6,16}$/;
+	var regExpNickName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,10}$/;
+
+	if( userId.length < 7 ) {
+			alert('아이디는 7자리 이상이어야 합니다.');
+	}else if( !regExpPassword.test(password) ) {
+		alert('비밀번호는 영문,숫자,특수문자 포함 및 6~16자리여야 합니다.');
+	}else if( !regExpNickName.test(nickName) ){
+		alert("닉네임은 한글, 영문, 숫자만 가능하며 2-10자리 가능합니다.");
+	}else {
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/member/joinOk", // 전송할 경로
+			data: {"userId":userId, "password":password, "nickName":nickName} , // 전송할 키와 값
+			success : function(data) {
+				if(data === 1) {
+					location.href="${pageContext.request.contextPath}/";
+				}else {
+					return ;
+				}
+			},
+			error : function(request, status, errorr) {
+				console.log(errorr);
 			}
-		},
-		error : function(request, status, errorr) {
-			console.log(errorr);
-		}
-	}); // end ajax	
+		}); // end ajax
+	}
+	
+		
 }
 </script>
 </body>
