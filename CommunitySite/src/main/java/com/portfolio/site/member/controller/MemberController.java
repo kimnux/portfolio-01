@@ -2,6 +2,7 @@ package com.portfolio.site.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.io.ResolverUtil.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -104,7 +105,6 @@ public class MemberController {
 	public int joinOk(MemberVO memberVO) {
 		
 		int result = memberService.join(memberVO);
-		log.info("joinOk - result : "+result);
 		return result;
 	}
 	

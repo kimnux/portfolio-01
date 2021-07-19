@@ -7,6 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div id="categoryList"></div>
 
+<script type="text/javascript">
+$(function() {
+	$.ajax({
+		type:"GET",
+		url:"${pageContext.request.contextPath}/category/list", // 전송할 경로
+		data: {} , // 전송할 키와 값
+		success : function(data) {
+			var html = "";
+			for(var i = 0; i < data.length; i++) {
+				console.log(data[i].categoryNm);
+				html += "<div>";
+				html += "  <a href='${pageContext.request.contextPath}"+data[i].url+"'>"+data[i].categoryNm+"</a>";
+				html += "</div>";
+			}
+			$("#categoryList").html(html);
+		},
+		error : function(request, status, errorr) {
+			console.log(errorr);
+		}
+	}); // end ajax
+});
+</script>
 </body>
 </html>
