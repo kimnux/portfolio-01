@@ -14,3 +14,15 @@ CREATE TABLE `tb_member` (
   UNIQUE KEY `tb_member_un` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='사용자 정보 테이블';
 ```
+
+-- community_site.tb_category definition
+```
+CREATE TABLE `tb_category` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryNm` varchar(100) NOT NULL,
+  `categoryNo` varchar(100) NOT NULL,
+  `depth` int(5) NOT NULL DEFAULT 0,
+  `url` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`idx`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+```
