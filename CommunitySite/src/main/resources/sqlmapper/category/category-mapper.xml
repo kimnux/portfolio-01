@@ -7,6 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원가입 -->
 	<select id="categoryList" resultType="CategoryVO">
-		select * from tb_category
+		SELECT  * FROM tb_category ORDER BY 'order' ASC
 	</select>
 </mapper>
