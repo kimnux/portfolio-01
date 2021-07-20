@@ -1,5 +1,7 @@
 package com.portfolio.site.member.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -10,6 +12,6 @@ public class MemberVO {
 	private String nickName;
 	private String grade;
 	
-	private String regDt;
+	private Date regDt;
 	private int failCnt;
 }
