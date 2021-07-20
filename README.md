@@ -23,6 +23,8 @@ CREATE TABLE `tb_category` (
   `categoryNo` varchar(100) NOT NULL,
   `depth` int(5) NOT NULL DEFAULT 0,
   `url` varchar(500) DEFAULT NULL,
+  `parent` bigint(20) NOT NULL DEFAULT 0,
+  `order` varchar(100) NOT NULL,
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 ```
