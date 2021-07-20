@@ -24,7 +24,7 @@ CREATE TABLE `tb_category` (
   `depth` int(5) NOT NULL DEFAULT 0,
   `url` varchar(500) CHARACTER SET utf8mb4 DEFAULT NULL,
   `parent` bigint(20) NOT NULL DEFAULT 0,
-  `order` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `order` int(11) NOT NULL,
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='카테고리 테이블';
 ```
