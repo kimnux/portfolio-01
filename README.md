@@ -19,12 +19,12 @@ CREATE TABLE `tb_member` (
 ```
 CREATE TABLE `tb_category` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
-  `categoryNm` varchar(100) NOT NULL,
-  `categoryNo` varchar(100) NOT NULL,
+  `categoryNm` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `categoryNo` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `depth` int(5) NOT NULL DEFAULT 0,
-  `url` varchar(500) DEFAULT NULL,
+  `url` varchar(500) CHARACTER SET utf8mb4 DEFAULT NULL,
   `parent` bigint(20) NOT NULL DEFAULT 0,
-  `order` varchar(100) NOT NULL,
+  `order` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='카테고리 테이블';
 ```
