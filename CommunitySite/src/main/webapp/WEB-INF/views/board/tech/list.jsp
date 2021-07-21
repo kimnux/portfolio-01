@@ -8,5 +8,9 @@
 </head>
 <body>
 	Tech List
+	<div>
+		<a href="${pageContext.request.contextPath }/tech/write">글쓰기</a>
+	</div>
+	
 </body>
 </html>
