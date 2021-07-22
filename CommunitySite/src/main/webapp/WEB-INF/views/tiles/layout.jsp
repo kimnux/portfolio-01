@@ -20,22 +20,22 @@
 	background-color: gray;
 }
 
-#content {
+#body {
 	float: left;
 	width: 85%;
-	background-color: lime;
+	background-color: white;
 }
 
 #footer {
 	width: 100%;
-	height: 50px;
+	height: 30px;
 	text-align: center;
 	background-color: orange;
 	clear: both;
 }
 
-#menu, #content {
-	min-height: 600px;
+#menu, #body {
+	min-height: 800px;
 }
 </style>
 </head>
