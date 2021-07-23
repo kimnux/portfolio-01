@@ -19,12 +19,16 @@
 
 <h2>Tech 작성</h2>
 <div style="width: 70%;">
-	<form action="" method="post">
+	<form action="${pageContext.request.contextPath }/tech/writeOk" method="post">
 		<div class="form-group">
-	     <input type="text" class="form-control" id="formGroupExampleInput" >
+	     <input type="text" class="form-control" id="title" name="title" >
 	   </div>
 		<div style="margin-top: 15px;">
-			<textarea name="summernote" id="summernote" ></textarea>
+			<textarea id="summernote" name="content" ></textarea>
+		</div>
+		<div align="right">
+			<input class="btn btn-light" type="button" onclick="javascript:history.back();" value="취소" />
+			<input class="btn btn-light" type="submit" value="글등록" />
 		</div>
 	</form>
 </div>
