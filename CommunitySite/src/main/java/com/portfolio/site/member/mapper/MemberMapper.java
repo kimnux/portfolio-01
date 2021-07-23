@@ -65,6 +65,15 @@ public interface MemberMapper {
 	 */
 	public int selectFailCnt(String userId) throws Exception;
 	
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 * 
+	 * 2021.07.24
+	 */
+	public String selectUserId(String userId) throws Exception;
 	
 	
 }
