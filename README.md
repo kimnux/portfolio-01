@@ -28,14 +28,12 @@ CREATE TABLE `tb_category` (
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='카테고리 테이블';
 ```
-
 -- community_site.tb_board_tech definition
 ```
 CREATE TABLE `tb_board_tech` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
   `content` text NOT NULL,
-  `good` tinyint(1) NOT NULL DEFAULT 0,
   `regDate` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tech 게시판 테이블';
