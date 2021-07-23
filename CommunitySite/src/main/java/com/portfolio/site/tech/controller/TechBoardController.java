@@ -1,9 +1,12 @@
 package com.portfolio.site.tech.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +26,9 @@ public class TechBoardController {
 	private TechBoardService techBoardService;
 	
 	@GetMapping("/list")
-	public String list() {
+	public String list(Model model) {
+		List<TechBoardVO> list = techBoardService.techList();
+		model.addAttribute("list",list);
 		return "board/tech/list";
 	}
 	
@@ -43,10 +48,8 @@ public class TechBoardController {
 		if(session == null) {
 			return "redirect:/";
 		}
-		//TODO: 저장 로직
 		techBoardVO.setWriter(session.getUserId());
 		techBoardService.write(techBoardVO);
-		//
 		
 		return "board/tech/list";
 	}
