@@ -71,11 +71,6 @@ public class MemberController {
 	@ResponseBody
 	public int loginOk(HttpServletRequest req, String userId, String password) {
 
-		int failCnt = memberService.selectFailCnt(userId);
-		if( failCnt >= 5 ) {
-			return 0;
-		}
-
 		MemberVO user = memberService.login(userId, password);
 		if( user == null ) {
 			return -1;
@@ -101,6 +96,13 @@ public class MemberController {
 		return "member/join";
 	}
 	
+	/**
+	 * 
+	 * @param memberVO
+	 * @return
+	 * 
+	 * 2021.07.17
+	 */
 	@PostMapping("/joinOk")
 	@ResponseBody
 	public int joinOk(MemberVO memberVO) {

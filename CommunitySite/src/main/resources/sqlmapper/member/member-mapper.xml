@@ -32,11 +32,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE tb_member SET failCnt = 0 WHERE userId = #{userId}
 	</update>
 	
-	<!-- failCnt 확인 -->
-	<select id="selectFailCnt" parameterType="String" resultType="Integer">
-		SELECT failCnt FROM tb_member WHERE userId = #{userId}
-	</select>
-	
 	
 	
 	

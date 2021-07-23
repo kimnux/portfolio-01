@@ -11,11 +11,11 @@
 	<div>
 		<div>
 			<label>ID</label>
-			<input type="text" id="userId" name="userId" value="">		
+			<input type="text" id="userId" name="userId" value="" onkeyup="enter()">		
 		</div>
 		<div>
 			<label>password</label>
-			<input type="password" id="password" name="password" value="">
+			<input type="password" id="password" name="password" value="" onkeyup="enter()">
 		</div>
 		<div>
 			<span id="failText"></span>
@@ -26,6 +26,12 @@
 	</div>
 	
 <script>
+
+function enter() {
+	if(window.event.keyCode == 13) {
+		loginCheck();
+	}
+}
 
 function loginCheck() {
 	var userId = $('#userId').val();
@@ -42,8 +48,6 @@ function loginCheck() {
 			}else if( data === -1 ) {
 				$('#failText').html('아이디/비밀번호를 환인해주세요.');
 				$('#failText').css('color','red').css('font-weight', 'bold');
-			} else if( data === 0 ){
-				alert('비밀번호가 5회이상 틀렸습니다.\n관리자에게 문의하세요.');
 			}
 		},
 		error : function(request, status, errorr) {
