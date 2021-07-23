@@ -35,6 +35,7 @@ CREATE TABLE `tb_board_tech` (
   `title` varchar(500) NOT NULL,
   `content` text NOT NULL,
   `regDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `writer` varchar(100) NOT NULL,
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tech 게시판 테이블';
 ```
