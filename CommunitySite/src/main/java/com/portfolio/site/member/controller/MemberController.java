@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.io.ResolverUtil.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,7 +104,6 @@ public class MemberController {
 	@PostMapping("/joinOk")
 	@ResponseBody
 	public int joinOk(MemberVO memberVO) {
-		
 		int result = memberService.join(memberVO);
 		return result;
 	}

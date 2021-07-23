@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	 <typeAliases>
 	 	<typeAlias alias="MemberVO" type="com.portfolio.site.member.vo.MemberVO" />
 	 	<typeAlias alias="CategoryVO" type="com.portfolio.site.category.vo.CategoryVO" />
+	 	<typeAlias alias="TechBoardVO" type="com.portfolio.site.tech.vo.TechBoardVO" />
 	 </typeAliases>
  
 </configuration>

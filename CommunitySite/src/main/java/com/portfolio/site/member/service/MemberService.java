@@ -3,6 +3,7 @@ package com.portfolio.site.member.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.portfolio.site.member.mapper.MemberMapper;
 import com.portfolio.site.member.vo.MemberVO;
@@ -79,6 +80,7 @@ public class MemberService {
 	 * 
 	 * 2021.07.17
 	 */
+	@Transactional
 	public int join(MemberVO memberVO) {
 		
 		// 디비에 저장할 비밀번호 암호화
