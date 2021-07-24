@@ -7,19 +7,20 @@
 <title>Insert title here</title>
 
 <!-- include libraries(jQuery, bootstrap) -->
+<!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/editor/summernote.css" />
+<script src="${pageContext.request.contextPath }/resources/editor/summernote.js" ></script>
 
 </head>
 <body>
 
 <h2>Tech 작성</h2>
 <div style="width: 70%;">
-	<form action="${pageContext.request.contextPath }/tech/writeOk" method="post">
+	<form action="${pageContext.request.contextPath }/tech/writeOk" method="post" onsubmit="return formCheck();">
 		<div class="form-group">
 	     <input type="text" class="form-control" id="title" name="title" >
 	   </div>
@@ -27,13 +28,35 @@
 			<textarea id="summernote" name="content" ></textarea>
 		</div>
 		<div align="right">
-			<input class="btn btn-light" type="button" onclick="javascript:history.back();" value="취소" />
+			<input class="btn btn-light" type="button" value="취소" />
 			<input class="btn btn-light" type="submit" value="글등록" />
 		</div>
 	</form>
 </div>
 
 <script>
+function formCheck() {
+	var title = $("#title").val();
+	title = ConvertSystemSourcetoHtml(title);
+	$("#title").val(title);
+
+	if( title.trim().length === 0 ) {
+		return false;
+	}
+	
+	return true;
+}
+
+function ConvertSystemSourcetoHtml(str){
+	str = str.replace(/</g,"&lt;");
+	str = str.replace(/>/g,"&gt;");
+	str = str.replace(/\"/g,"&quot;");
+	str = str.replace(/\'/g,"&#39;");
+	str = str.replace(/\n/g,"<br />");
+	
+	return str;
+}
+
 $(function() {
 	$('#summernote').summernote({
 	  // 에디터 높이
@@ -65,9 +88,11 @@ $(function() {
 		  // 추가한 글꼴
 		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
 		 // 추가한 폰트사이즈
-		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
   	});
 });
+
+
 </script>
 </body>
 </html>
