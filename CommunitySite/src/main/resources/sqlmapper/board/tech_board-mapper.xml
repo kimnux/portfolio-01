@@ -10,12 +10,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO tb_board_tech (title,content,writer) VALUES (#{title}, #{content}, #{writer});
 	</insert>
 	
-	<!-- Tech 리스트 -->
-	<select id="techList" resultType="TechBoardVO">
-		SELECT * FROM tb_board_tech ORDER BY idx DESC
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(*) FROM tb_board_tech
 	</select>
 	
+	<!-- Tech 리스트 -->
+	<select id="techList" parameterType="Map" resultType="TechBoardVO">
+		SELECT * FROM tb_board_tech ORDER BY idx DESC LIMIT #{startNo}, #{pageSize}
+		
+	</select>
 	
+	<!-- Tech 상세 -->
+	<select id="techDetail" parameterType="int" resultType="TechBoardVO">
+		SELECT * FROM tb_board_tech WHERE idx=#{idx}
+	</select>
 	
 	
 </mapper>
