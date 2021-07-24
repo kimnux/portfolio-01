@@ -15,7 +15,7 @@
 			<input type="text" class="form-control" disabled="disabled" value="${detail.title }" >
 		</div>
 		
-		<div class="card" style="height: 550px;">
+		<div class="card" style="overflow:scroll; height: 550px;">
 		  <div class="card-body">
 		    <p class="card-text">${detail.content }</p>
 		  </div>
