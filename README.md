@@ -1,5 +1,9 @@
 # portfolio-01
 
+Summernote는 image업로드를 base64방식으로 진행 => 용량이 금방 커진다...
+Tomcat server.xml에 maxPostSize의 default값은 2MB.
+2MB이상 post전송시 에러발생으로 maxPostSize값을 -1로 설정한다.
+
 -- community_site.tb_member definition
 ```
 CREATE TABLE `tb_member` (
