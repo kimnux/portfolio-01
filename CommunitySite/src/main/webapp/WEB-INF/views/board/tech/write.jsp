@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 
 <h2>Tech 작성</h2>
 <div style="width: 70%;">
-	<form id="form" action="${pageContext.request.contextPath }/tech/writeOk" method="post" onsubmit="return formCheck();">
+	<form name="form" action="${pageContext.request.contextPath }/tech/writeOk" method="post" onsubmit="return formCheck();">
 		<div class="form-group">
 	     <input type="text" class="form-control" id="title" name="title" value="${detail.title }">
 	   </div>
@@ -29,12 +30,27 @@
 		</div>
 		<div align="right">
 			<input class="btn btn-light" type="button" value="취소" />
-			<input class="btn btn-light" type="submit" value="글등록" />
+			<c:choose>
+				<c:when test="${flag eq 'edit' }">
+					<input type="hidden" name="idx" value="${detail.idx }" />
+					<input class="btn btn-light" type="button" onclick="editOk()" value="글수정" />
+				</c:when>
+				<c:otherwise>
+					<input class="btn btn-light" type="submit" value="글등록" />
+				</c:otherwise>
+			</c:choose>
+			
 		</div>
 	</form>
 </div>
 
 <script>
+function editOk() {
+	var form = document.form;
+	form.action = "${pageContext.request.contextPath}/tech/editOk";
+	form.submit();
+}
+
 function formCheck() {
 	var title = $("#title").val();
 	title = ConvertSystemSourcetoHtml(title);

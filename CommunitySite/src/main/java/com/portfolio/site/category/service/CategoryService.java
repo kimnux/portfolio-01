@@ -17,6 +17,12 @@ public class CategoryService {
 	@Autowired
 	private CategoryMapper categoryMapper;
 	
+	/**
+	 * 
+	 * @return
+	 * 
+	 * 2021.07.20
+	 */
 	public List<CategoryVO> categoryList() {
 		List<CategoryVO> list = categoryMapper.categoryList();
 		log.info("categoryList : " + list);

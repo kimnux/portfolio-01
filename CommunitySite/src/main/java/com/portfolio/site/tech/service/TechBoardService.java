@@ -21,6 +21,12 @@ public class TechBoardService {
 	@Autowired
 	private TechBoardMapper techBoardMapper;
 	
+	/**
+	 * 
+	 * @param params
+	 * 
+	 * 2021.07.24
+	 */
 	@Transactional
 	public void write(TechBoardVO params) {
 		try {
@@ -30,6 +36,15 @@ public class TechBoardService {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param currentPage
+	 * @param pageSize
+	 * @param blockSize
+	 * @return
+	 * 
+	 * 2021.07.24
+	 */
 	public Paging<TechBoardVO> techList(int currentPage, int pageSize, int blockSize) {
 		List<TechBoardVO> list = null;
 		Paging<TechBoardVO> paging = null;
@@ -49,6 +64,13 @@ public class TechBoardService {
 		return paging;
 	}
 	
+	/**
+	 * 
+	 * @param idx
+	 * @return
+	 * 
+	 * 2021.07.25
+	 */
 	public TechBoardVO techDetail(int idx) {
 		TechBoardVO detail = null;
 		try {
@@ -57,6 +79,21 @@ public class TechBoardService {
 			e.printStackTrace();
 		}
 		return detail;
+	}
+	
+	/**
+	 * 
+	 * @param params
+	 * 
+	 * 2021.07.27
+	 */
+	@Transactional
+	public void techUpdate(TechBoardVO params) {
+		try {
+			techBoardMapper.techUpdate(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
