@@ -24,7 +24,16 @@ public class TechBoardController {
 	
 	@Autowired
 	private TechBoardService techBoardService;
-	
+	/**
+	 * 
+	 * @param model
+	 * @param currentPage
+	 * @param pageSize
+	 * @param blockSize
+	 * @return
+	 * 
+	 * 2021.07.24
+	 */
 	@GetMapping("/list")
 	public String list(Model model,@RequestParam(defaultValue = "1", value = "p", required = false) int currentPage, 
 			 @RequestParam(defaultValue = "5", value = "s", required = false) int pageSize, 
@@ -35,7 +44,14 @@ public class TechBoardController {
 		
 		return "board/tech/list";
 	}
-	
+
+	/**
+	 * 
+	 * @param req
+	 * @return
+	 * 
+	 * 2021.07.24
+	 */
 	@GetMapping("/write")
 	public String write(HttpServletRequest req) {
 		if(req.getSession().getAttribute("user_info") == null) {
@@ -45,6 +61,16 @@ public class TechBoardController {
 		return "board/tech/write";
 	}
 	
+	/**
+	 * 
+	 * @param req
+	 * @param techBoardVO
+	 * @param title
+	 * @param content
+	 * @return
+	 * 
+	 * 2021.07.24
+	 */
 	@PostMapping("/writeOk")
 	public String writeOk(HttpServletRequest req, TechBoardVO techBoardVO, String title, String content) {
 		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
@@ -63,6 +89,14 @@ public class TechBoardController {
 		return "redirect:/tech/list";
 	}
 	
+	/**
+	 * 
+	 * @param idx
+	 * @param model
+	 * @return
+	 * 
+	 * 2021.07.25
+	 */
 	@GetMapping("/detail")
 	public String detail(int idx, Model model) {
 		TechBoardVO detail = techBoardService.techDetail(idx);
@@ -70,6 +104,15 @@ public class TechBoardController {
 		return "board/tech/detail";
 	}
 	
+	/**
+	 * 
+	 * @param req
+	 * @param idx
+	 * @param model
+	 * @return
+	 * 
+	 * 2021.07.26
+	 */
 	@PostMapping("edit")
 	public String edit(HttpServletRequest req, int idx, Model model) {
 		if(req.getSession().getAttribute("user_info") == null) {
@@ -77,7 +120,22 @@ public class TechBoardController {
 		}
 		TechBoardVO detail = techBoardService.techDetail(idx);
 		model.addAttribute("detail", detail);
+		model.addAttribute("flag","edit");
 		return "board/tech/write";
+	}
+	
+	/**
+	 * 
+	 * @param idx
+	 * @return
+	 * 
+	 * 2021.07.27
+	 */
+	@PostMapping("editOk")
+	public String editOk(TechBoardVO params) {
+		techBoardService.techUpdate(params);
+		
+		return "redirect:/tech/detail?idx="+params.getIdx();
 	}
 	
 }

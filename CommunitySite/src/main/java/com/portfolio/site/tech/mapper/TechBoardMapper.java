@@ -11,5 +11,5 @@ public interface TechBoardMapper {
 	public List<TechBoardVO> techList(Map<String, Integer> map) throws Exception;
 	public TechBoardVO techDetail(int idx) throws Exception;
 	public int totalCount() throws Exception;
-	
+	public void techUpdate(TechBoardVO params) throws Exception;
 }

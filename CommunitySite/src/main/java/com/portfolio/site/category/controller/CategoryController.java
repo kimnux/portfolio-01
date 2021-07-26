@@ -18,6 +18,12 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	 
+	/**
+	 * 
+	 * @return
+	 * 
+	 * 2021.07.20
+	 */
 	@GetMapping("/list")
 	@ResponseBody
 	public List<CategoryVO> categoryList() {
