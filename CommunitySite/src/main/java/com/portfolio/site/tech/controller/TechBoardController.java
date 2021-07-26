@@ -70,7 +70,15 @@ public class TechBoardController {
 		return "board/tech/detail";
 	}
 	
-
+	@PostMapping("edit")
+	public String edit(HttpServletRequest req, int idx, Model model) {
+		if(req.getSession().getAttribute("user_info") == null) {
+			return "redirect:/member/login";
+		}
+		TechBoardVO detail = techBoardService.techDetail(idx);
+		model.addAttribute("detail", detail);
+		return "board/tech/write";
+	}
 	
 }
 

@@ -20,12 +20,12 @@
 
 <h2>Tech 작성</h2>
 <div style="width: 70%;">
-	<form action="${pageContext.request.contextPath }/tech/writeOk" method="post" onsubmit="return formCheck();">
+	<form id="form" action="${pageContext.request.contextPath }/tech/writeOk" method="post" onsubmit="return formCheck();">
 		<div class="form-group">
-	     <input type="text" class="form-control" id="title" name="title" >
+	     <input type="text" class="form-control" id="title" name="title" value="${detail.title }">
 	   </div>
 		<div style="margin-top: 15px;">
-			<textarea id="summernote" name="content" ></textarea>
+			<textarea id="summernote" name="content" >${detail.content }</textarea>
 		</div>
 		<div align="right">
 			<input class="btn btn-light" type="button" value="취소" />
