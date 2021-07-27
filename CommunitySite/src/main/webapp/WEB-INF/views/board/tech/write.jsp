@@ -105,8 +105,53 @@ $(function() {
 		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
 		 // 추가한 폰트사이즈
 		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+		// onImageUpload callback
+		callbacks: {
+		    onImageUpload: function(files) {
+		    	console.log("callbacks files ======> ", files);
+		    },
+		    onPaste: function (e) {
+				var clipboardData = e.originalEvent.clipboardData;
+				console.log("clipboardData =====>",clipboardData);
+				if (clipboardData && clipboardData.items && clipboardData.items.length) {
+					var item = clipboardData.items[0];
+					if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+						e.preventDefault();
+					}
+				}
+			}
+		  }
   	});
+
+	// summernote.image.upload
+	$('#summernote').on('summernote.image.upload', function(we, files) {
+		console.log("we ======> ", we);
+		console.log("files ======> ", files);
+		console.log("this =======> ",this);
+		
+		var data = new FormData();
+		data.append("file", files[0]);
+		console.log('data ======++> ', files[0]);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/uploadSummernoteImageFile",
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				console.log('success : ',data);
+	        	//항상 업로드된 파일의 url이 있어야 한다.
+				//$(this).summernote('insertImage', data.url);
+				$('#summernote').summernote('insertImage', data.url);
+			},
+			error:function(request,status,error){
+			    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		   }
+		});
+	});
+
 });
+
 
 
 </script>
