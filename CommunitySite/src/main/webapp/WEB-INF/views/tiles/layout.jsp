@@ -18,10 +18,13 @@
 	float: left;
 	width: 15%;
 	background-color: gray;
+	top: 0;
+	bottom: 0;
+	position: fixed;
 }
 
 #body {
-	float: left;
+	float: right;
 	width: 85%;
 	background-color: white;
 }
@@ -44,7 +47,6 @@
 	    <div id="header"><tiles:insertAttribute name="header" /></div>
 	    <div id="menu"><tiles:insertAttribute name="menu" /></div>
 	    <div id="body"><tiles:insertAttribute name="body" /></div>    
-	    <div id="footer"><tiles:insertAttribute name="footer" /></div>
 	</div>
 </body>
 </html>

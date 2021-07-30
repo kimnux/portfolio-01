@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 
 <!-- include libraries(jQuery, bootstrap) -->
-<!-- include libraries(jQuery, bootstrap) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -20,6 +19,7 @@
 <body>
 
 <h2>Tech 작성</h2>
+
 <div style="width: 70%;">
 	<form name="form" action="${pageContext.request.contextPath }/tech/writeOk" method="post" onsubmit="return formCheck();">
 		<div class="form-group">
