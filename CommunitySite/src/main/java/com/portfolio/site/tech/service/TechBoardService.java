@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.portfolio.site.common.util.Paging;
 import com.portfolio.site.tech.mapper.TechBoardMapper;
 import com.portfolio.site.tech.vo.TechBoardVO;
+import com.portfolio.site.tech.vo.TechReplyVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,6 +92,31 @@ public class TechBoardService {
 	public void techUpdate(TechBoardVO params) {
 		try {
 			techBoardMapper.techUpdate(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<TechReplyVO> techReplyList(int board_idx) {
+		List<TechReplyVO> list = null;
+		try {
+			list = techBoardMapper.techReplyList(board_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
+	 * 
+	 * @param params
+	 * 
+	 * 2021.07.31
+	 */
+	@Transactional
+	public void replyWrite(TechReplyVO params) {
+		try {
+			techBoardMapper.replyWrite(params);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -25,11 +25,13 @@
 	</div>
 	
 	<!-- 댓글 -->
-	<div class="form-floating" style="margin-left:20px; margin-top: 30px; width: 70%; border: 1px solid #ced4da;">
-		<div style="height:30px; background-color: #ced4da;">답변</div>
-		<label for="floatingTextarea2">Comments</label>
-		<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-	</div>
+	<form action="${pageContext.request.contextPath }/tech/replyOk">
+		<div class="form-floating" style="margin-left:20px; margin-top: 30px; width: 70%; border: 1px solid #ced4da;">
+			<div style="height:30px; background-color: #ced4da;">답변</div>
+			<div id="replyList"></div>
+			<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+		</div>
+	</form>
 	
 	<!-- 수정, 삭제 -->
 	<div class="dropdown" style="margin-left:20px; width: 70%;" align="right">
@@ -41,5 +43,35 @@
 			<button class="dropdown-item">삭제</button>
 		</div>
 	</div>
+	
+<script type="text/javascript">
+$(function() {
+	replyList();
+});
+
+function replyList() {
+	$.ajax({
+		data : {board_idx:"${detail.idx}"},
+		type : "GET",
+		url : "/tech/replyList",
+		success : function(data) {
+			console.log('success : ',data);
+			var html = "";
+			for(var i = 0; i < data.length; i++) {
+				html += "<div>";
+				html += data[i].replyContent;
+				html += "</div>";
+			console.log(data[i]);
+			}
+			$("#replyList").html(html);
+		},
+		error:function(request,status,error){
+		    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   }
+	});
+}
+	
+
+</script>
 </body>
 </html>
