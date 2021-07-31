@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- Tech 글쓰기 -->
 	<insert id="write" parameterType="TechBoardVO">
-		INSERT INTO tb_board_tech (title,content,writer) VALUES (#{title}, #{content}, #{writer});
+		INSERT INTO tb_board_tech (title,content,writer) VALUES (#{title}, #{content}, #{writer})
 	</insert>
 	
 	<select id="totalCount" resultType="int">
@@ -29,5 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE tb_board_tech SET title = #{title}, content = #{content} where idx=#{idx}
 	</update>
 	
+	<!-- 댓글 리스트 -->
+	<select id="techReplyList" parameterType="int" resultType="TechReplyVO">
+		SELECT * FROM tb_reply_tech WHERE board_idx = #{board_idx}
+	</select>
 	
+	<!-- 댓글 작성 -->
+	<insert id="replyWrite" parameterType="TechReplyVO">
+		INSERT INTO tb_reply_tech (board_idx, content, writer) VALUES (#{board_idx}, #{content}, #{writer})
+	</insert>
 </mapper>

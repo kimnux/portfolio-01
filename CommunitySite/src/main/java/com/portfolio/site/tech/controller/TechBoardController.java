@@ -1,5 +1,7 @@
 package com.portfolio.site.tech.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.portfolio.site.common.util.Paging;
 import com.portfolio.site.member.vo.MemberVO;
 import com.portfolio.site.tech.service.TechBoardService;
 import com.portfolio.site.tech.vo.TechBoardVO;
+import com.portfolio.site.tech.vo.TechReplyVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -113,7 +117,7 @@ public class TechBoardController {
 	 * 
 	 * 2021.07.26
 	 */
-	@PostMapping("edit")
+	@PostMapping("/edit")
 	public String edit(HttpServletRequest req, int idx, Model model) {
 		if(req.getSession().getAttribute("user_info") == null) {
 			return "redirect:/member/login";
@@ -131,11 +135,32 @@ public class TechBoardController {
 	 * 
 	 * 2021.07.27
 	 */
-	@PostMapping("editOk")
+	@PostMapping("/editOk")
 	public String editOk(TechBoardVO params) {
 		techBoardService.techUpdate(params);
 		
 		return "redirect:/tech/detail?idx="+params.getIdx();
+	}
+	
+	@GetMapping("/replyList")
+	@ResponseBody
+	public List<TechReplyVO> techReplyList(int board_idx) {
+		List<TechReplyVO> list = techBoardService.techReplyList(board_idx);
+		log.info("list : " + list);
+		
+		return list;
+	}
+	
+	/**
+	 * 
+	 * @param params
+	 * 
+	 * 2021.07.31
+	 */
+	@PostMapping("/replyOk")
+	@ResponseBody
+	public void replyOk(TechReplyVO params) {
+		techBoardService.replyWrite(params);
 	}
 	
 }
