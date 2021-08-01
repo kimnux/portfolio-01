@@ -36,6 +36,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 댓글 작성 -->
 	<insert id="replyWrite" parameterType="TechReplyVO">
-		INSERT INTO tb_reply_tech (board_idx, content, writer) VALUES (#{board_idx}, #{content}, #{writer})
+		INSERT INTO tb_reply_tech (board_idx, reply_content, writer) VALUES (#{board_idx}, #{reply_content}, #{writer})
 	</insert>
 </mapper>

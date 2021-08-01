@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<setting name="lazyLoadingEnabled" value="false"/>
 		<setting name="defaultExecutorType" value="SIMPLE"/>
 		<setting name="defaultStatementTimeout" value="25000"/>
-		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 

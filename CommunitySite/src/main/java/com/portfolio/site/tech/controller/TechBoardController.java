@@ -39,7 +39,8 @@ public class TechBoardController {
 	 * 2021.07.24
 	 */
 	@GetMapping("/list")
-	public String list(Model model,@RequestParam(defaultValue = "1", value = "p", required = false) int currentPage, 
+	public String list(
+			Model model,@RequestParam(defaultValue = "1", value = "p", required = false) int currentPage, 
 			 @RequestParam(defaultValue = "5", value = "s", required = false) int pageSize, 
 			 @RequestParam(defaultValue = "5", value = "b", required = false) int blockSize) {
 		
@@ -102,9 +103,12 @@ public class TechBoardController {
 	 * 2021.07.25
 	 */
 	@GetMapping("/detail")
-	public String detail(int idx, Model model) {
+	public String detail(HttpServletRequest req, int idx, Model model) {
+		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
 		TechBoardVO detail = techBoardService.techDetail(idx);
+
 		model.addAttribute("detail", detail);
+		model.addAttribute("session",session);
 		return "board/tech/detail";
 	}
 	
@@ -159,7 +163,10 @@ public class TechBoardController {
 	 */
 	@PostMapping("/replyOk")
 	@ResponseBody
-	public void replyOk(TechReplyVO params) {
+	public void replyOk(HttpServletRequest req, TechReplyVO params) {
+		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
+		params.setWriter(session.getUserId());
+		
 		techBoardService.replyWrite(params);
 	}
 	
