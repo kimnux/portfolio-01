@@ -45,6 +45,7 @@
 </div>
 
 <script>
+
 function editOk() {
 	var form = document.form;
 	form.action = "${pageContext.request.contextPath}/tech/editOk";
@@ -53,9 +54,9 @@ function editOk() {
 
 function formCheck() {
 	var title = $("#title").val();
-	title = ConvertSystemSourcetoHtml(title);
-	$("#title").val(title);
-
+	/* title = ConvertSystemSourcetoHtml(title);
+	$("#title").val(title); */
+	
 	if( title.trim().length === 0 ) {
 		return false;
 	}
@@ -75,6 +76,8 @@ function ConvertSystemSourcetoHtml(str){
 
 $(function() {
 	$('#summernote').summernote({
+	  codeviewFilter: false,
+	  codeviewIframeFilter: false,
 	  // 에디터 높이
 	  height: 550,
 	  // 에디터 한글 설정
@@ -120,7 +123,9 @@ $(function() {
 					}
 				}
 			}
-		  }
+		  },
+		codeviewFilter: true,
+	  	codeviewIframeFilter: true
   	});
 
 	// summernote.image.upload
