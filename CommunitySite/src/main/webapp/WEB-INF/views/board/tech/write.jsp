@@ -140,7 +140,7 @@ $(function() {
 		$.ajax({
 			data : data,
 			type : "POST",
-			url : "/uploadSummernoteImageFile",
+			url : "${pageContext.request.contextPath}/uploadSummernoteImageFile",
 			contentType : false,
 			processData : false,
 			success : function(data) {
