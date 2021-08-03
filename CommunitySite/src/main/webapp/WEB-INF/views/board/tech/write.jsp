@@ -26,7 +26,7 @@
 	     <input type="text" class="form-control" id="title" name="title" value="${detail.title }">
 	   </div>
 		<div style="margin-top: 15px;">
-			<textarea id="summernote" name="content" >${detail.content }</textarea>
+			<textarea id="summernote" name="content" ><c:out value="${detail.content }" /></textarea>
 		</div>
 		<div align="right">
 			<input class="btn btn-light" type="button" value="취소" />
