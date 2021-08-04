@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/eclipse,java
-# Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java
+# Created by https://www.toptal.com/developers/gitignore/api/java,eclipse
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
 ### Eclipse ###
 .metadata
@@ -38,6 +38,7 @@ local.properties
 
 # sbteclipse plugin
 .target
+target/
 
 # Tern plugin
 .tern-project
@@ -93,4 +94,13 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# End of https://www.toptal.com/developers/gitignore/api/eclipse,java
+# End of https://www.toptal.com/developers/gitignore/api/java,eclipse
+
+.project
+.classpath
+
+#DB properties
+src/main/resources/db.properties
+
+
+
