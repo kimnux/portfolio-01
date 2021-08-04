@@ -54,8 +54,6 @@ function editOk() {
 
 function formCheck() {
 	var title = $("#title").val();
-	/* title = ConvertSystemSourcetoHtml(title);
-	$("#title").val(title); */
 	
 	if( title.trim().length === 0 ) {
 		return false;
