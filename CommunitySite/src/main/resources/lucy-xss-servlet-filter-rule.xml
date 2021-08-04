@@ -44,10 +44,10 @@
         </params>
           -->
         <!-- 
-        -->
         <params>
             <param name="content" useDefender="false" />
         </params>
+        -->
     </global>
 
     <!-- url 별 필터링 룰 선언 -->
