@@ -27,7 +27,7 @@
 		</div>
 	</c:forEach>
 	
-	<c:if test="${paging.totalCount > 10}">
+	<c:if test="${paging.totalCount > 5}">
    		${paging.pageList2 }
    	</c:if>
 	
