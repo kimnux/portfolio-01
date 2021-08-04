@@ -8,6 +8,7 @@
 </head>
 <body>
 	<div id="categoryList"></div>
+	<div><img src="${pageContext.request.contextPath }/resources/image/git_hub.png" alt="" /><a href="https://github.com/kimnux/portfolio-01/issues">git</a></div>
 
 <script type="text/javascript">
 $(function() {
