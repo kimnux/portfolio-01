@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
  * 2021.07.11
  */
 @Controller
-@RequestMapping("/")
 @Slf4j
 public class IndexController {
 	
