@@ -19,7 +19,7 @@ public class KakaoLogin {
 
 	@GetMapping("/getKakaoAuthUrl")
 	public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
-		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=741a93d1adf560f947ac035e292697aa"
+		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id="
 				+ "&redirect_uri=http://localhost:8080/CommunitySite/oauth" + "&response_type=code";
 
 		return reqUrl;
