@@ -6,6 +6,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@PropertySource("classpath:api.properties")
 public class KakaoLogin {
 
 	@Autowired
 	private KakaoAPI kakao;
+	
+	@Value("${k.client_id}")
+	private String client_id;
+	
+	@Value("${k.redirect_uri}")
+	private String redirect_uri;
 
 	@GetMapping("/getKakaoAuthUrl")
 	public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
-		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id="
-				+ "&redirect_uri=http://localhost:8080/CommunitySite/kakao_oauth" + "&response_type=code";
+		String reqUrl = "https://kauth.kakao.com/oauth/authorize" 
+						+ "?client_id="+client_id
+						+ "&redirect_uri="+redirect_uri 
+						+ "&response_type=code";
 
 		return reqUrl;
 	}

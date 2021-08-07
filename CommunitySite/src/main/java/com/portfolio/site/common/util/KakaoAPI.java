@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
@@ -16,7 +18,14 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Service
+@PropertySource("classpath:api.properties")
 public class KakaoAPI {
+
+	@Value("${k.client_id}")
+	private String client_id;
+	
+	@Value("${k.redirect_uri}")
+	private String redirect_uri;
 
 	// 토큰발급
 	public String getAccessToken(String authorize_code) {
@@ -37,8 +46,8 @@ public class KakaoAPI {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id="); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8080/CommunitySite/kakao_oauth"); // 본인이 설정해 놓은 경로
+			sb.append("&client_id="+client_id); // 본인이 발급받은 key
+			sb.append("&redirect_uri="+redirect_uri); // 본인이 설정해 놓은 경로
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
