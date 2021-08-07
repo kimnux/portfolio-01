@@ -1,5 +1,6 @@
 package com.portfolio.site.common.util;
 
+
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,27 +21,31 @@ public class KakaoLogin {
 	@GetMapping("/getKakaoAuthUrl")
 	public @ResponseBody String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
 		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id="
-				+ "&redirect_uri=http://localhost:8080/CommunitySite/oauth" + "&response_type=code";
+				+ "&redirect_uri=http://localhost:8080/CommunitySite/kakao_oauth" + "&response_type=code";
 
 		return reqUrl;
 	}
-
-	// 카카오 연동정보 조회
-	@GetMapping("/oauth")
+	
+	@GetMapping("/kakao_oauth")
 	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Model model, HttpServletRequest req)
 			throws Exception {
 
-		System.out.println("#########" + code);
-		String access_Token = kakao.getAccessToken(code);
-		System.out.println("###access_Token#### : " + access_Token);
-		req.getSession().setAttribute("kakaoToken", access_Token);
+		if(code != null) {
+			System.out.println("#########" + code);
+			
+			String access_Token = kakao.getAccessToken(code);
+			System.out.println("###access_Token#### : " + access_Token);
+			req.getSession().setAttribute("kakaoToken", access_Token);// 토근 저장
+			
+			HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
+			req.getSession().setAttribute("userInfo", userInfo); // 사용자정보 세션저장
 
-		HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-		System.out.println("###access_Token#### : " + access_Token);
-//		System.out.println("###userInfo#### : " + userInfo.get("email"));
-		System.out.println("###nickname#### : " + userInfo.get("nickname"));
-
-		model.addAttribute("userInfo", userInfo);
+			System.out.println("###access_Token#### : " + access_Token);
+//			System.out.println("###userInfo#### : " + userInfo.get("email"));
+			System.out.println("###nickname#### : " + userInfo.get("nickname"));
+			
+//			model.addAttribute("userInfo", userInfo);
+		}
 
 		return "main"; // 본인 원하는 경로 설정
 	}
@@ -50,6 +55,8 @@ public class KakaoLogin {
 	public String logout(HttpServletRequest req) {
 		String token = (String) req.getSession().getAttribute("kakaoToken");
 		kakao.getLogout(token);
+		
+		req.getSession().removeAttribute("userInfo"); // 사용자정보 세션저장
 		return "redirect:/";
 	}
 

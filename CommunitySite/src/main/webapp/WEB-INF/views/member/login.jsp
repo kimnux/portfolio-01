@@ -27,16 +27,11 @@
 			<input type="button" onclick="loginCheck();" value="로그인">
 		</div>
 	</div>
-	
-	<button onclick="kakaoLogin()">카카오 로그인</button>
-	<button onclick="kakaoLogout()">카카오 로그아웃</button>
+	<a onclick="kakaoLogin()">
+		<img width="30px;" height="30px;" alt="카카오 로그인" src="${pageContext.request.contextPath }/resources/image/kakao_logo.png">
+	</a>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-//카카오로그아웃
-function kakaoLogout() {
-	location.href="${pageContext.request.contextPath}/logout";
-}
-
 //카카오로그인
 function kakaoLogin() {
 
