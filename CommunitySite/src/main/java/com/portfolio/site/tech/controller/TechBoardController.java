@@ -1,5 +1,6 @@
 package com.portfolio.site.tech.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.portfolio.site.common.util.KakaoAPI;
 import com.portfolio.site.common.util.Paging;
 import com.portfolio.site.member.vo.MemberVO;
 import com.portfolio.site.tech.service.TechBoardService;
@@ -28,6 +30,10 @@ public class TechBoardController {
 	
 	@Autowired
 	private TechBoardService techBoardService;
+	
+	@Autowired
+	private KakaoAPI kakao;
+	
 	/**
 	 * 
 	 * @param model
@@ -59,7 +65,9 @@ public class TechBoardController {
 	 */
 	@GetMapping("/write")
 	public String write(HttpServletRequest req) {
-		if(req.getSession().getAttribute("user_info") == null) {
+		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
+		
+		if(req.getSession().getAttribute("user_info") == null && kakaoToken == null) {
 			return "redirect:/member/login";
 		}
 		
@@ -79,12 +87,18 @@ public class TechBoardController {
 	@PostMapping("/writeOk")
 	public String writeOk(HttpServletRequest req, TechBoardVO techBoardVO, String title, String content) {
 		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
-
-		if(session == null) {
+		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
+		
+		if(session == null && kakaoToken == null) {
 			return "redirect:/";
 		}
+		if(session != null) {
+			techBoardVO.setWriter(session.getUserId());
+		}else if(kakaoToken != null) {
+			HashMap<String, Object> userInfo = kakao.getUserInfo(kakaoToken);
+			techBoardVO.setWriter((String) userInfo.get("nickname"));
+		}
 		
-		techBoardVO.setWriter(session.getUserId());
 		try {
 			techBoardService.write(techBoardVO);
 		}catch (Exception e) {

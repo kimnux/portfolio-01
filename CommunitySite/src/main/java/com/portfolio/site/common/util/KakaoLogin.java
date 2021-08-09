@@ -67,7 +67,8 @@ public class KakaoLogin {
 		String token = (String) req.getSession().getAttribute("kakaoToken");
 		kakao.getLogout(token);
 		
-		req.getSession().removeAttribute("userInfo"); // 사용자정보 세션저장
+		req.getSession().removeAttribute("kakaoToken"); // 토큰 삭제
+		req.getSession().removeAttribute("userInfo"); // 사용자 정보 세션 삭제
 		return "redirect:/";
 	}
 

@@ -18,7 +18,9 @@
 $(function () {
 	
 	var user_info = '${sessionScope.user_info}';
-	if( user_info.length > 0 || '${userInfo }'.length > 0 ) {
+	var kakaoToken = '${kakaoToken}';
+
+	if( user_info.length > 0 || kakaoToken.length > 0 ) {
 		if( user_info.length > 0 ) {
 			$("#login_id").html(user_info.userId); // 일반 로그인시
 			$("#login").html('<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>');
