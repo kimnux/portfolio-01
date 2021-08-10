@@ -119,10 +119,17 @@ public class TechBoardController {
 	@GetMapping("/detail")
 	public String detail(HttpServletRequest req, int idx, Model model) {
 		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
+		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
 		TechBoardVO detail = techBoardService.techDetail(idx);
 
 		model.addAttribute("detail", detail);
-		model.addAttribute("session",session);
+		if(session != null) {
+			model.addAttribute("session",session);
+		}
+		if(kakaoToken != null) {
+			HashMap<String, Object> userInfo = kakao.getUserInfo(kakaoToken);
+			model.addAttribute("userInfo",userInfo);
+		}
 		return "board/tech/detail";
 	}
 	
@@ -137,9 +144,12 @@ public class TechBoardController {
 	 */
 	@PostMapping("/edit")
 	public String edit(HttpServletRequest req, int idx, Model model) {
-		if(req.getSession().getAttribute("user_info") == null) {
+		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
+		
+		if(req.getSession().getAttribute("user_info") == null && kakaoToken == null) {
 			return "redirect:/member/login";
 		}
+		
 		TechBoardVO detail = techBoardService.techDetail(idx);
 		model.addAttribute("detail", detail);
 		model.addAttribute("flag","edit");
