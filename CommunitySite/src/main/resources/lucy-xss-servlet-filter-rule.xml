@@ -78,11 +78,13 @@
             <url>/CommunitySite/tech/writeOk</url>
             <params>
                 <param name="content" useDefender="false" />
-                <!-- 
-                <param name="url2Parameter2">
-                    <defender>xssSaxFilterDefender</defender>
-                </param> -->
             </params>
         </url-rule>
+        <url-rule>
+			<url>/CommunitySite/tech/editOk</url>
+			<params>
+				<param name="content" useDefender="false" />
+			</params>
+		</url-rule>
     </url-rule-set>
 </config>

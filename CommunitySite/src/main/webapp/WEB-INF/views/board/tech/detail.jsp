@@ -13,7 +13,7 @@
 </head>
 <body>
 	<!-- 수정, 삭제 -->
-	<c:if test="${session.userId eq detail.writer }">
+	<c:if test="${session.userId eq detail.writer || userInfo.nickname eq detail.writer }">
 		<div class="dropdown" style="margin-left:20px; margin-top:10px; width: 70%;" align="right">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			 	<img alt="설정버튼" src="${pageContext.request.contextPath }/resources/image/settings-cogwheel-button.png" style="width: 20px;">
