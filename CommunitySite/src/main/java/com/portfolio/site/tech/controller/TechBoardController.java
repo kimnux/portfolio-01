@@ -144,9 +144,10 @@ public class TechBoardController {
 	 */
 	@PostMapping("/edit")
 	public String edit(HttpServletRequest req, int idx, Model model) {
+		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
 		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
 		
-		if(req.getSession().getAttribute("user_info") == null && kakaoToken == null) {
+		if(session == null && kakaoToken == null) {
 			return "redirect:/member/login";
 		}
 		
@@ -189,7 +190,16 @@ public class TechBoardController {
 	@ResponseBody
 	public void replyOk(HttpServletRequest req, TechReplyVO params) {
 		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
-		params.setWriter(session.getUserId());
+		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
+		
+		if(session != null) {
+			params.setWriter(session.getUserId());
+		}
+		if(kakaoToken != null) {
+			HashMap<String, Object> userInfo = kakao.getUserInfo(kakaoToken);
+			params.setWriter((String)userInfo.get("nickname"));
+		}
+		
 		
 		techBoardService.replyWrite(params);
 	}
