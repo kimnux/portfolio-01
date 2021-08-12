@@ -46,9 +46,7 @@
 	<div style="margin-left:20px; margin-top: 10px; width: 70%;" align="right">
 		<button type="button" class="btn btn-dark" onclick="formCheck()">댓글등록</button>
 	</div>
-	
-	
-	
+
 <script type="text/javascript">
 $(function() {
 	replyList();
@@ -80,17 +78,22 @@ function replyList() {
 			console.log('success : ',data);
 			var html = "";
 			for(var i = 0; i < data.length; i++) {
-				html += "<div>";
-				html += "	<div style='float: left;'>";
+				html += "<div style='display:flex; padding:6px;'>";
+				html += "	<div style='text-align: left; width:33%'>";
 				html += "		<p>";
 				html += "@"+data[i].writer;
 				html += "		</p>";
 				html += "	</div>";
-				html += "	<div align='center'>";
+				html += "	<div style='text-align: center; width:33%'>";
 				html += "		<p>";
 				html += data[i].reply_content;
 				html += "		</p>";
 				html += "	</div>";
+				html += "<div style='text-align: right; width:33%'>";
+				html += "	<span style='cursor: pointer;' onclick=''>";
+				html += "		<img src='${pageContext.request.contextPath}/resources/image/no_good.png' alt='좋아요' style='width: 30px;' />";
+				html += "	</sapn>";
+				html += "</div>";
 				html += "</div>";
 				html += "<hr>";
 			console.log(data[i]);
