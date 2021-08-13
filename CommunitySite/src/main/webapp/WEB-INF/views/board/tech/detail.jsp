@@ -54,19 +54,25 @@ $(function() {
 
 function formCheck() {
 	var reply_content = $("#reply_content").val();
-	$.ajax({
-		data : {board_idx:"${detail.idx}", reply_content:reply_content},
-		type : "POST",
-		url : "${pageContext.request.contextPath }/tech/replyOk",
-		success : function(data) {
-			replyList();
-			$("#reply_content").val("");
-		},
-		error:function(request,status,error){
-		    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	   }
-	});
+	var userInfo = '${sessionScope.userInfo}';
+	var user_info = '${sessionScope.user_info}';
 	
+	if(userInfo.length === 0 && user_info.length === 0) {
+		alert('로그인하세요');
+	}else {
+		$.ajax({
+			data : {board_idx:"${detail.idx}", reply_content:reply_content},
+			type : "POST",
+			url : "${pageContext.request.contextPath }/tech/replyOk",
+			success : function(data) {
+				replyList();
+				$("#reply_content").val("");
+			},
+			error:function(request,status,error){
+			    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		   }
+		});
+	}
 }
 
 function replyList() {
