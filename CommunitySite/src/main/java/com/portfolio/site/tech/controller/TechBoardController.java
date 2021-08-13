@@ -194,14 +194,15 @@ public class TechBoardController {
 		
 		if(session != null) {
 			params.setWriter(session.getUserId());
+			techBoardService.replyWrite(params);
 		}
 		if(kakaoToken != null) {
 			HashMap<String, Object> userInfo = kakao.getUserInfo(kakaoToken);
 			params.setWriter((String)userInfo.get("nickname"));
+			techBoardService.replyWrite(params);
 		}
 		
 		
-		techBoardService.replyWrite(params);
 	}
 	
 }
