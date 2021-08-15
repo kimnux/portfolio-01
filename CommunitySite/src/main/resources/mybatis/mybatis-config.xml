@@ -19,6 +19,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	 	<typeAlias alias="CategoryVO" type="com.portfolio.site.category.vo.CategoryVO" />
 	 	<typeAlias alias="TechBoardVO" type="com.portfolio.site.tech.vo.TechBoardVO" />
 	 	<typeAlias alias="TechReplyVO" type="com.portfolio.site.tech.vo.TechReplyVO" />
+	 	<typeAlias alias="GoodVO" type="com.portfolio.site.tech.vo.GoodVO" />
 	 	
 	 </typeAliases>
  
