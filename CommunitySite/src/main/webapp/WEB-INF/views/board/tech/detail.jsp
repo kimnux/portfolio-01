@@ -24,9 +24,13 @@
 			</div>
 		</div>
 	</c:if>
-	
 	<!-- 본문 -->
 	<div style="width: 70%; margin-left:20px; margin-top: 10px;">
+		<div align="right">
+			<span style='cursor: pointer;' onclick='board_good()'>
+				<img src='${pageContext.request.contextPath}/resources/image/no_good.png' alt='좋아요' style='width: 30px;' id="good" />
+			</span>
+		</div>
 		<div class="mb-2">
 			<input type="text" class="form-control" disabled="disabled" value="${detail.title }" >
 		</div>
@@ -51,6 +55,26 @@
 $(function() {
 	replyList();
 });
+
+function board_good() {
+	$.ajax({
+		data : {board_idx:"${detail.idx}"},
+		type : "POST",
+		url : "${pageContext.request.contextPath }/tech/board_good",
+		success : function(data) {
+			if(data.redirect) {
+				location.href="${pageContext.request.contextPath}"+data.redirect;
+			}else {
+				$("#good").attr('src', '${pageContext.request.contextPath}/resources/image/no_good.png');
+				$("#good").attr('src', '${pageContext.request.contextPath}/resources/image/good.png');
+			}
+			
+		},
+		error:function(request,status,error){
+		    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	   }
+	});
+}
 
 function formCheck() {
 	var reply_content = $("#reply_content").val();
