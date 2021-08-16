@@ -11,4 +11,6 @@ public class GoodVO {
 	private String userId;
 	private int isGood;
 	private Date regDate;
+	
+	private int count;
 }

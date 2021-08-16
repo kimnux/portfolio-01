@@ -38,4 +38,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="replyWrite" parameterType="TechReplyVO">
 		INSERT INTO tb_reply_tech (board_idx, reply_content, writer) VALUES (#{board_idx}, #{reply_content}, #{writer})
 	</insert>
+	
+	<!-- 좋아요 select -->
+	<select id="selectTechBoardGood" parameterType="GoodVO" resultType="GoodVO">
+		SELECT IFNULL(isGood, FALSE) AS isGood, count(isGood) AS count FROM tb_good_tech RIGHT OUTER JOIN (SELECT '') AS m_dual ON board_idx=#{board_idx} and userId=#{userId}
+	</select>
+	
+	<insert id="insertTechBoardGood" parameterType="GoodVO">
+		insert into tb_good_tech (board_idx, userId, isGood) values (#{board_idx}, #{userId}, #{isGood}) 
+	</insert>
+	
+	<update id="updateTechBoardGood" parameterType="GoodVO">
+		update tb_good_tech set isGood = #{isGood} where board_idx=#{board_idx} and userId=#{userId}
+	</update>
+	
+	
 </mapper>

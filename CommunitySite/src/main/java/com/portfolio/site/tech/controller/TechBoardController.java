@@ -2,6 +2,7 @@ package com.portfolio.site.tech.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import com.portfolio.site.common.util.KakaoAPI;
 import com.portfolio.site.common.util.Paging;
 import com.portfolio.site.member.vo.MemberVO;
 import com.portfolio.site.tech.service.TechBoardService;
+import com.portfolio.site.tech.vo.GoodVO;
 import com.portfolio.site.tech.vo.TechBoardVO;
 import com.portfolio.site.tech.vo.TechReplyVO;
 
@@ -122,14 +124,26 @@ public class TechBoardController {
 		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
 		TechBoardVO detail = techBoardService.techDetail(idx);
 
+		GoodVO goodVO = new GoodVO();
+		goodVO.setBoard_idx(idx);
+
 		model.addAttribute("detail", detail);
 		if(session != null) {
 			model.addAttribute("session",session);
+			goodVO.setUserId(session.getUserId());
 		}
+		
 		if(kakaoToken != null) {
 			HashMap<String, Object> userInfo = kakao.getUserInfo(kakaoToken);
 			model.addAttribute("userInfo",userInfo);
+			goodVO.setUserId((String) userInfo.get("nickname"));
 		}
+
+		if(goodVO.getUserId() != null) {
+			GoodVO isGood = techBoardService.selectTechBoardGood(goodVO);
+			model.addAttribute("isGood",isGood.getIsGood());
+		}
+		
 		return "board/tech/detail";
 	}
 	
@@ -202,7 +216,31 @@ public class TechBoardController {
 			techBoardService.replyWrite(params);
 		}
 		
+	}
+	
+	@PostMapping("/board_good")
+	@ResponseBody
+	public Map<String,String> boardGood(HttpServletRequest req, GoodVO goodVO) {
+		MemberVO session = (MemberVO) req.getSession().getAttribute("user_info");
+		String kakaoToken = (String)req.getSession().getAttribute("kakaoToken");
 		
+		Map<String,String> map = new HashMap<>();
+		if(session == null && kakaoToken == null) {
+			map.put("redirect", "/member/login");
+			return map;
+		}
+		if(session != null) {
+			goodVO.setUserId(session.getUserId());
+		}
+		if(kakaoToken != null) {
+			HashMap<String, Object> userInfo = kakao.getUserInfo(kakaoToken);
+			goodVO.setUserId((String)userInfo.get("nickname"));
+		}
+		
+		String isGood = techBoardService.updateTechBoardGood(goodVO);
+		map.put("good", isGood);
+		
+		return map;
 	}
 	
 }
