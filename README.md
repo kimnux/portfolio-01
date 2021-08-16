@@ -67,11 +67,11 @@ CREATE TABLE `tb_good_tech` (
   `board_idx` int(11) NOT NULL,
   `userId` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `isGood` tinyint(1) DEFAULT 0,
-  `regDate` timestamp NULL DEFAULT current_timestamp(),
+  `regDate` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`idx`),
   KEY `tb_good_tech_FK` (`board_idx`),
   CONSTRAINT `tb_good_tech_FK` FOREIGN KEY (`board_idx`) REFERENCES `tb_board_tech` (`idx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='게시판 좋아요 테이블';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='게시판 좋아요 테이블';
 
 ```
 
