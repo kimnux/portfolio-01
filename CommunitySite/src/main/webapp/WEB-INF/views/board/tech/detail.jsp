@@ -28,7 +28,14 @@
 	<div style="width: 70%; margin-left:20px; margin-top: 10px;">
 		<div align="right">
 			<span style='cursor: pointer;' onclick='board_good()'>
-				<img src='${pageContext.request.contextPath}/resources/image/no_good.png' alt='좋아요' style='width: 30px;' id="good" />
+			<c:choose>
+				<c:when test="${isGood eq 1 }">
+					<img src='${pageContext.request.contextPath}/resources/image/good.png' alt='좋아요' style='width: 30px;' id="good" />
+				</c:when>
+				<c:otherwise>
+					<img src='${pageContext.request.contextPath}/resources/image/no_good.png' alt='좋아요' style='width: 30px;' id="good" />
+				</c:otherwise>
+			</c:choose>
 			</span>
 		</div>
 		<div class="mb-2">
@@ -65,8 +72,12 @@ function board_good() {
 			if(data.redirect) {
 				location.href="${pageContext.request.contextPath}"+data.redirect;
 			}else {
-				$("#good").attr('src', '${pageContext.request.contextPath}/resources/image/no_good.png');
-				$("#good").attr('src', '${pageContext.request.contextPath}/resources/image/good.png');
+				console.log('data.good : '+data.good);
+				if(data.good === '1') {
+					$("#good").attr('src', '${pageContext.request.contextPath}/resources/image/good.png');
+				}else if(data.good === '0') {
+					$("#good").attr('src', '${pageContext.request.contextPath}/resources/image/no_good.png');
+				}
 			}
 			
 		},
@@ -105,7 +116,6 @@ function replyList() {
 		type : "GET",
 		url : "${pageContext.request.contextPath }/tech/replyList",
 		success : function(data) {
-			console.log('success : ',data);
 			var html = "";
 			for(var i = 0; i < data.length; i++) {
 				html += "<div style='display:flex; padding:6px;'>";
@@ -126,7 +136,6 @@ function replyList() {
 				html += "</div>";
 				html += "</div>";
 				html += "<hr>";
-			console.log(data[i]);
 			}
 			$("#replyList").html(html);
 		},

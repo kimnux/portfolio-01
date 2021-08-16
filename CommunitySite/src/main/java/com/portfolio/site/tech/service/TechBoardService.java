@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.portfolio.site.common.util.Paging;
 import com.portfolio.site.tech.mapper.TechBoardMapper;
+import com.portfolio.site.tech.vo.GoodVO;
 import com.portfolio.site.tech.vo.TechBoardVO;
 import com.portfolio.site.tech.vo.TechReplyVO;
 
@@ -121,5 +122,53 @@ public class TechBoardService {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param goodVO
+	 * @return
+	 * 
+	 * 2021.08.15
+	 */
+	public GoodVO selectTechBoardGood(GoodVO goodVO) {
+		GoodVO vo = null;
+		
+		try {
+			vo = techBoardMapper.selectTechBoardGood(goodVO);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	public String updateTechBoardGood(GoodVO goodVO) {
+		try {
+			GoodVO vo = techBoardMapper.selectTechBoardGood(goodVO);
+			
+			if(vo.getCount() == 0) {
+				goodVO.setIsGood(1);
+				techBoardMapper.insertTechBoardGood(goodVO);
+				
+				return "1";
+			} else if(vo.getCount() == 1) {
+				//update
+				switch(vo.getIsGood()) {
+				case 0: goodVO.setIsGood(1); break;
+				case 1: goodVO.setIsGood(0); break;
+				}
+				
+				techBoardMapper.updateTechBoardGood(goodVO);
+				return goodVO.getIsGood()+"";
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	
 }

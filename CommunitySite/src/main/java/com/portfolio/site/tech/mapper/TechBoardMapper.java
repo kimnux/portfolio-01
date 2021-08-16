@@ -3,6 +3,7 @@ package com.portfolio.site.tech.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.portfolio.site.tech.vo.GoodVO;
 import com.portfolio.site.tech.vo.TechBoardVO;
 import com.portfolio.site.tech.vo.TechReplyVO;
 
@@ -16,4 +17,8 @@ public interface TechBoardMapper {
 	
 	public List<TechReplyVO> techReplyList (int board_idx) throws Exception;
 	public void replyWrite(TechReplyVO params) throws Exception;
+	
+	public GoodVO selectTechBoardGood(GoodVO goodVO) throws Exception;
+	public void insertTechBoardGood(GoodVO goodVO) throws Exception;
+	public void updateTechBoardGood(GoodVO goodVO) throws Exception;
 }
