@@ -129,11 +129,6 @@ function replyList() {
 				html += data[i].reply_content;
 				html += "		</p>";
 				html += "	</div>";
-				html += "<div style='text-align: right; width:33%'>";
-				html += "	<span style='cursor: pointer;' onclick=''>";
-				html += "		<img src='${pageContext.request.contextPath}/resources/image/no_good.png' alt='좋아요' style='width: 30px;' />";
-				html += "	</sapn>";
-				html += "</div>";
 				html += "</div>";
 				html += "<hr>";
 			}
